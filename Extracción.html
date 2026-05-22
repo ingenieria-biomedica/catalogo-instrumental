@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Instrumental - Sutura</title>
+	 <style>
+        body { font-family: sans-serif; margin: 0; background: #f4f7f6; }
+        header { background: #2c3e50; color: white; padding: 20px; text-align: center; }
+        nav { display: flex; justify-content: center; background: #ddd; }
+        nav a {
+    padding: 10px 15px; 
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    
+   
+    font-size: 14px;     
+    text-align: center;   
+    display: flex;     
+    align-items: center;  
+    justify-content: center;
+    min-width: 100px;    
+}
+        nav a:hover { background: #ccc; }
+        nav a.active { background: white; border-bottom: 3px solid #3498db; color: #3498db; }
+        main { max-width: 800px; margin: 30px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .card { border: 1px solid #eee; padding: 15px; border-radius: 5px; background: #fafafa; }
+        strong { color: #2c3e50; display: block; margin-bottom: 5px; }
+		 .instrument-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Se ajusta solo al ancho de la pantalla */
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    overflow: hidden; /* Corta la imagen si sobresale de las esquinas redondeadas */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.card-image {
+    width: 100%;
+    height: 180px; /* Altura fija para que todas las fotos se vean iguales */
+    background-color: #f0f0f0; /* Color gris de fondo si no hay foto */
+    border-bottom: 1px solid #eee;
+    overflow: hidden;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta la foto sin deformarla */
+}
+
+.card-info {
+    padding: 15px;
+}
+
+.card-info strong {
+    color: #2c3e50;
+    font-size: 1.1em;
+    display: block;
+    margin-bottom: 5px;
+}
+	 .card img {
+    width: 100%;          /* Esto hace que la foto nunca sea más ancha que la tarjeta */
+    height: 200px;        /* Altura fija para que todas se vean parejitas */
+    object-fit: contain;    /* ¡Esta es la clave! Recorta la foto para que no se vea estirada o flaca */
+    display: block;       /* Quita espacios raros debajo de la imagen */
+    margin-bottom: 10px;  /* Separa la foto del título */
+    border-radius: 5px;   /* Le da un toque profesional con esquinas redondeadas */
+}
+		 /* --- ESTILOS PARA EL MODAL DE FÓRCEPS --- */
+.modal-forceps {
+    display: none; 
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75); 
+    overflow-y: auto;
+}
+
+.modal-contenido-forceps {
+    background-color: #ffffff;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 700px;
+    position: relative;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.4);
+}
+
+.cerrar-forceps {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #aaa;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.cerrar-forceps:hover { 
+    color: #000; 
+}
+
+.forceps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.item-forceps {
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 10px;
+    text-align: center;
+    background-color: #fafafa;
+}
+
+.item-forceps img {
+    width: 100%;
+    height: 110px;
+    object-fit: contain;
+    background-color: #fff;
+    border-radius: 4px;
+}
+
+.item-forceps span {
+    display: block;
+    font-weight: bold;
+    margin-top: 8px;
+    font-size: 13px;
+    color: #2c3e50;
+}
+		 footer {
+    background-color: #dcdcdc;
+    color: 2c3e50;
+    padding: 30px 50px;
+    margin-top: 50px; 
+    text-align: left;
+    border-top: 4px solid #2c3e50; 
+}
+
+.credits-container p {
+    margin: 5px 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.credits-container strong {
+    color: #2c3e50;
+}
+	 /* --- ESTILOS PARA EL FOOTER CON CRÉDITOS Y QR --- */
+
+/* Hace que los créditos y el QR se separen a los extremos */
+.credits-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Centra verticalmente ambos elementos */
+    flex-wrap: wrap; /* Por si se abre en pantallas muy chicas, no se amontone */
+    padding: 10px 20px;
+}
+
+.creditos-texto {
+    text-align: left;
+}
+
+.creditos-texto p {
+    margin: 4px 0; /* Espaciado limpio entre líneas de texto */
+}
+
+/* Contenedor del código QR alineado a la derecha */
+.qr-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Control del tamaño del código QR */
+.qr-imagen {
+    width: 90px;  /* Tamaño ideal para que no rompa el diseño gris */
+    height: 90px;
+    border: 3px solid #ffffff; /* Pequeño marco blanco para resaltar */
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: transform 0.2s ease;
+}
+
+/* Efecto visual al pasar el mouse por encima del QR */
+.qr-imagen:hover {
+    transform: scale(1.05); 
+}
+
+/* Texto pequeño debajo del QR */
+.qr-container span {
+    font-size: 11px;
+    font-weight: bold;
+    color: #555555;
+    margin-top: 6px;
+}
+    </style>
+</head>
+<body>
+    <header><h1>Instrumental Dental General</h1></header>
+    <nav>
+        <a href="index.html">Diagnóstico</a>
+  		<a href="Anestesia.html">Anestesia</a> 
+		<a href="Incisión.html">Incisión</a> 
+		<a href="Despegamiento y elevación.html">Despegamiento y Elevación</a>
+		<a href="Extracción.html" class="active">Extracción</a>
+		<a href="Rotatorio.html">Rotatorio</a>
+		<a href="Legrado y Limpieza.html">Legrado y Limpieza</a>
+		<a href="Hemostasia.html">Hemostasia</a>
+		<a href="Sutura.html">Sutura</a>
+    </nav>
+    <main>
+        <h2>Pestaña: Instrumental de Extracción</h2>
+        <div class="grid">
+            <div class="card"><img src="proyecto/forcep.jpeg" width="640" height="480" alt="Fórceps" style="cursor: pointer;" onclick="abrirModalForceps()"><strong>Fórceps</strong>Instrumento principal para la extracción dental. Consta de mango, cuello y bocados adaptados a la anatomía de cada diente. Permiten aplicar movimientos controlados vestibulares, linguales y rotatorios&nbsp;</div>
+            <div class="card"><img src="proyecto/sind.jpeg" width="877" height="872" alt=""/><strong>Sindesmótomo</strong>Instrumento cortante que se introduce en el surco gingival para desprender las fibras del ligamento periodontal antes de la luxación.&nbsp;</div>
+
+        </div>
+		<footer>
+    <div class="credits-container">
+        <div class="creditos-texto">
+            <p><strong>Ingeniería Biomédica - 2026</strong></p>
+            <p><strong>Proyecto:</strong> Catálogo de Instrumental Quirúrgico para Implantología y Diagnóstico</p>
+            <p><strong>Desarrollado por:</strong> Samantha Yaretzi Cardoso Moron</p>
+            <p>Belinda Michua Juarez&nbsp;</p>
+            <p>Vanesa Gonzales Alvarado</p>
+            <p>Maria Fernanda Gonzáles Reyes</p>
+        </div>
+
+        <div class="qr-container">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeV3LJBA8NRk8zDEfGL_mRSxBwHm049yVEm9FG4LTK64nseHg/viewform" target="_blank" title="¡Danos tu opinión!">
+                <img src="proyecto/qr.png" alt="QR Cuestionario de Opinión" class="qr-imagen">
+            </a>
+            <span>¿Qué te pareció la página? ¡Escanea aquí!</span>
+        </div>
+    </div>
+</footer>
+    </main>
+<div id="modalForceps" class="modal-forceps">
+    <div class="modal-contenido-forceps">
+        <span class="cerrar-forceps" onclick="cerrarModalForceps()">&times;</span>
+        
+        <h3 style="color: #2c3e50; margin-bottom: 5px;">Fórceps</h3>
+        <p style="font-size: 14px; color: #555; margin-bottom: 20px; text-align: left;">
+            Instrumental de presión que actúa como una extensión de la mano del cirujano.
+        </p>
+        
+        <div class="forceps-grid">
+            <div class="item-forceps">
+                <img src="proyecto/forcemax.jpeg" alt="Fórceps Maxilar Superior">
+                <span>Maxilar Superior</span>
+            </div>
+            <div class="item-forceps">
+                <img src="proyecto/forceman.jpeg" alt="Fórceps Mandíbula">
+                <span>Mandíbula</span>
+            </div>
+        </div>
+        
+        <div style="text-align: left; font-size: 13.5px; line-height: 1.6; color: #333; border-top: 1px solid #eee; padding-top: 15px;">
+            
+            <ul style="padding-left: 20px; margin-bottom: 20px;">
+                <li style="margin-bottom: 15px;">
+                    <strong>Fórceps para Maxilar Superior:</strong> Se caracterizan por tener las válvulas y el mango en un mismo eje o en una curvatura suave en "S".
+                    <ul style="padding-left: 20px; margin-top: 5px; list-style-type: circle;">
+                        <li><strong>No. 1 y 2 (Incisivo-Canino):</strong> Valvas rectas para ejercer presión en piezas unirradiculares.</li>
+                        <li><strong>No. 18 (R/L - Molares):</strong> Poseen un diseño asimétrico con una punta en una de sus válvulas para adaptarse a la trifurcación radicular vestibular de los molares superiores.</li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <strong>Fórceps para Mandíbula:</strong> Presentan una angulación de 90° entre la parte activa y el mango para facilitar el acceso biomecánico.
+                    <ul style="padding-left: 20px; margin-top: 5px; list-style-type: circle;">
+                        <li><strong>No. 22 (Molar Inferior):</strong> Sus válvulas terminan en puntas gemelas diseñadas para anclarse en la furca de las raíces mesial y distal de los molares inferiores.</li>
+                        <li><strong>No. 33 y 52A (Raíces):</strong> Valvas finas y convergentes para la sujeción de restos radiculares a nivel cervical.</li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+	<script>
+function abrirModalForceps() {
+    document.getElementById("modalForceps").style.display = "block";
+}
+
+function cerrarModalForceps() {
+    document.getElementById("modalForceps").style.display = "none";
+}
+
+// Cierra si hacen clic afuera del cuadro blanco
+window.onclick = function(event) {
+    var modal = document.getElementById("modalForceps");
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+</body>
+</html>
