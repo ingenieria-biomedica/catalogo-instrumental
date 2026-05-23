@@ -5,7 +5,16 @@
     <title>Instrumental - Exodoncia</title>
     <style> body { font-family: sans-serif; margin: 0; background: #f4f7f6; }
         header { background: #2c3e50; color: white; padding: 20px; text-align: center; }
-     nav { display: flex; box-sizing: border-box; justify-content: flex-start; background: #ddd; padding: 10px 20px; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
+   nav { 
+            display: flex; 
+            box-sizing: border-box; 
+            justify-content: flex-start; /* Se alinea a la izquierda para poder deslizar */
+            background: #ddd; 
+            padding: 10px 20px; 
+            overflow-x: auto; 
+            white-space: nowrap; 
+            -webkit-overflow-scrolling: touch; 
+        }
         nav a {
             padding: 10px 15px;
             text-decoration: none;
@@ -14,13 +23,26 @@
             font-size: 14px;
             text-align: center;
             display: inline-block;
-            align-items: center;
-            justify-content: center;
             min-width: 100px;
-            flex-shrink: 0; /* 👈 Esto evita que el celular aplaste Diagnóstico y Sutura */
+            flex-shrink: 0;
         }
         nav a:hover { background: #ccc; }
         nav a.active { background: white; border-bottom: 3px solid #3498db; color: #3498db; }
+
+        /* 💻 ESTILO PARA COMPUTADORAS: Se activa automáticamente en pantallas grandes */
+        @media (min-width: 850px) {
+            nav {
+                justify-content: center; /* 🎯 ¡Vuelve a centrar todos los botones en la compu! */
+                overflow-x: visible;     /* Quita la barra de deslizamiento porque aquí sí cabe todo */
+                white-space: normal;
+            }
+            nav a {
+                display: flex;           /* Regresa al diseño original centrado en PC */
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 1;
+            }
+        }
 		 main { 
             width: 95%; 
             max-width: 800px; 
