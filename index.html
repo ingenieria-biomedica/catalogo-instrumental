@@ -5,67 +5,61 @@
     <title>Instrumental - Diagnóstico</title>
  <style> body { font-family: sans-serif; margin: 0; background: #f4f7f6; }
         header { background: #2c3e50; color: white; padding: 20px; text-align: center; }
-    nav { display: flex; box-sizing: border-box; justify-content: flex-start; background: #ddd; padding: 10px 20px; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
-        nav a {
-            padding: 10px 15px;
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-            font-size: 14px;
-            text-align: center;
-            display: inline-block;
-            align-items: center;
-            justify-content: center;
-            min-width: 100px;
-            flex-shrink: 0; /* 👈 Esto evita que el celular aplaste Diagnóstico y Sutura */
-        }
-        nav a:hover { background: #ccc; }
-        nav a.active { background: white; border-bottom: 3px solid #3498db; color: #3498db; }
-	 }
-        main { 
-            width: 90%; 
+    nav { display: flex; justify-content: center; background: #ddd; }
+       main { 
+            width: 95%; 
             max-width: 800px; 
-            margin: 40px auto; /* ↕️ Más espacio arriba y abajo para que no se pegue al menú */
+            margin: 30px auto; /* ↕️ ¡ESTA ES LA CLAVE! 30px arriba y abajo despeja los instrumentos del menú y los distribuye mejor */
             background: white; 
-            padding: 30px 20px; /* ↕️ Más colchón interno para distribuir el texto */
+            padding: 20px; 
             border-radius: 8px; 
             box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
             box-sizing: border-box;
         }
+	 nav a {
+    padding: 10px 15px; 
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    
+   
+    font-size: 14px;     
+    text-align: center;   
+    display: flex;     
+    align-items: center;  
+    justify-content: center;
+    min-width: 100px;    
+}
+        nav a:hover { background: #ccc; }
+        nav a.active { background: white; border-bottom: 3px solid #3498db; color: #3498db; }
+        main { max-width: 800px; margin: 30px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .card { border: 1px solid #eee; padding: 15px; border-radius: 5px; background: #fafafa; }
+        strong { color: #2c3e50; display: block; margin-bottom: 5px; }
+		.instrument-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Se ajusta solo al ancho de la pantalla */
+    gap: 20px;
+    margin-top: 20px;
+}
 
-        /* --- 2. DISTRIBUCIÓN DE LAS TARJETAS DE INSTRUMENTAL --- */
-        .instrument-grid, .grid { 
-            display: grid; 
-            /* En celulares se pondrá una tarjeta por fila y en pantallas grandes se acomodarán solas */
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 25px; /* ↕️ Más separación entre una tarjeta y otra */
-            margin-top: 25px; 
-            width: 100%;
-            box-sizing: border-box;
-        }
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    overflow: hidden; /* Corta la imagen si sobresale de las esquinas redondeadas */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+}
 
-        /* --- 3. ESTILIZADO DE CADA TARJETA INDIVIDUAL --- */
-        .card { 
-            border: 1px solid #eee; 
-            padding: 20px; 
-            border-radius: 8px; 
-            background: #fafafa; 
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02); /* Sombra sutil para dar volumen */
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between; /* Distribuye el contenido interno de la tarjeta equitativamente */
-            box-sizing: border-box;
-        }
-
-        /* --- 4. AJUSTE PARA LAS IMÁGENES DE LOS INSTRUMENTOS --- */
-        .card img {
-            max-width: 100%;
-            height: auto;
-            max-height: 180px; /* Evita que imágenes muy grandes deformen el diseño en el celular */
-            object-fit: contain;
-            margin: 0 auto 15px auto; /* Centra la imagen y le da espacio respecto al texto de abajo */
-            display: block;
-        }
+.card-image {
+    width: 100%;
+    height: 180px; /* Altura fija para que todas las fotos se vean iguales */
+    background-color: #f0f0f0; /* Color gris de fondo si no hay foto */
+    border-bottom: 1px solid #eee;
+    overflow: hidden;
+}
 
 .card-image img {
     width: 100%;
@@ -208,9 +202,9 @@
     <main>
         <h2>Pestaña: Diagnóstico y Evaluación&nbsp; &nbsp;&nbsp;</h2>
         <div class="grid">
-            <div class="card"><img src="espejo.jpeg" width="1000" height="1250" alt=""/><strong>Espejo Dental</strong>Permite visión indirecta en zonas de difícil acceso, refleja la luz hacia el campo operatorio y facilita la retracción de tejidos blandos como mejillas y lengua.&nbsp;</div>
-            <div class="card"><img src="sondae.jpeg" width="4" height="55" alt=""/><strong>Sonda Exploradora</strong>Se utiliza para detectar irregularidades en la superficie dental, fracturas o lesiones.&nbsp;</div>
-            <div class="card"><img src="sondap.jpeg" width="940" height="788" alt=""/><strong>Sonda Periodontal</strong>Mide la profundidad de las bolsas periodontales y evalúa el nivel de inserción y soporte óseo.&nbsp;</div>
+            <div class="card"><img src="proyecto/espejo.jpeg" width="1000" height="1250" alt=""/><strong>Espejo Dental</strong>Permite visión indirecta en zonas de difícil acceso, refleja la luz hacia el campo operatorio y facilita la retracción de tejidos blandos como mejillas y lengua.&nbsp;</div>
+            <div class="card"><img src="proyecto/sondae.jpeg" width="4" height="55" alt=""/><strong>Sonda Exploradora</strong>Se utiliza para detectar irregularidades en la superficie dental, fracturas o lesiones.&nbsp;</div>
+            <div class="card"><img src="proyecto/sondap.jpeg" width="940" height="788" alt=""/><strong>Sonda Periodontal</strong>Mide la profundidad de las bolsas periodontales y evalúa el nivel de inserción y soporte óseo.&nbsp;</div>
         </div>
 		<footer>
     <div class="credits-container">
