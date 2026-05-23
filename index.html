@@ -5,28 +5,22 @@
     <title>Instrumental - Diagnóstico</title>
  <style> body { font-family: sans-serif; margin: 0; background: #f4f7f6; }
         header { background: #2c3e50; color: white; padding: 20px; text-align: center; }
-      nav { display: flex; justify-content: center; background: #ddd; }
+    nav { display: flex; box-sizing: border-box; justify-content: flex-start; background: #ddd; padding: 10px 20px; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
         nav a {
-    padding: 10px 15px; 
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    
-   
-    font-size: 14px;     
-    text-align: center;   
-    display: flex;     
-    align-items: center;  
-    justify-content: center;
-    min-width: 100px;    
-	overflow-x: auto;            /* Activa la barra de desplazamiento horizontal si no cabe */
-    white-space: nowrap;         /* Evita que los nombres se rompan en dos renglones abajo */
-    -webkit-overflow-scrolling: touch;
-}
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 14px;
+            text-align: center;
+            display: inline-block;
+            align-items: center;
+            justify-content: center;
+            min-width: 100px;
+            flex-shrink: 0; /* 👈 Esto evita que el celular aplaste Diagnóstico y Sutura */
+        }
         nav a:hover { background: #ccc; }
-        nav a.active { background: white; border-bottom: 3px solid #3498db; color: #3498db; 
-	 flex-shrink: 0;
-	 display: inline-block;
+        nav a.active { background: white; border-bottom: 3px solid #3498db; color: #3498db; }
 	 }
         main { max-width: 800px; margin: 30px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
@@ -191,22 +185,22 @@
     <header><h1>Instrumental Dental General</h1></header>
 
   <nav>
-        <a href="index.html" class="active">Diagnóstico</a>
-        <a href="Anestesia.html">Anestesia</a>
-        <a href="Incisión.html">Incisión</a>
-        <a href="Despegamiento y elevación.html">Despegamiento y Elevación</a>
-        <a href="Extracción.html">Extracción</a>
-        <a href="Rotatorio.html">Rotatorio</a>
-        <a href="Legrado y Limpieza.html">Legrado y Limpieza</a>
-        <a href="Hemostasia.html">Hemostasia</a>
-        <a href="Sutura.html">Sutura</a>
+        <a href="../index.html" class="active">Diagnóstico</a>
+        <a href="../Anestesia.html">Anestesia</a>
+        <a href="../Incisión.html">Incisión</a>
+        <a href="../Despegamiento y elevación.html">Despegamiento y Elevación</a>
+        <a href="../Extracción.html">Extracción</a>
+        <a href="../Rotatorio.html">Rotatorio</a>
+        <a href="../Legrado y Limpieza.html">Legrado y Limpieza</a>
+        <a href="../Hemostasia.html">Hemostasia</a>
+        <a href="../Sutura.html">Sutura</a>
     </nav>
     <main>
         <h2>Pestaña: Diagnóstico y Evaluación&nbsp; &nbsp;&nbsp;</h2>
         <div class="grid">
-            <div class="card"><img src="proyecto/espejo.jpeg" width="1000" height="1250" alt=""/><strong>Espejo Dental</strong>Permite visión indirecta en zonas de difícil acceso, refleja la luz hacia el campo operatorio y facilita la retracción de tejidos blandos como mejillas y lengua.&nbsp;</div>
-            <div class="card"><img src="proyecto/sondae.jpeg" width="4" height="55" alt=""/><strong>Sonda Exploradora</strong>Se utiliza para detectar irregularidades en la superficie dental, fracturas o lesiones.&nbsp;</div>
-            <div class="card"><img src="proyecto/sondap.jpeg" width="940" height="788" alt=""/><strong>Sonda Periodontal</strong>Mide la profundidad de las bolsas periodontales y evalúa el nivel de inserción y soporte óseo.&nbsp;</div>
+            <div class="card"><img src="espejo.jpeg" width="1000" height="1250" alt=""/><strong>Espejo Dental</strong>Permite visión indirecta en zonas de difícil acceso, refleja la luz hacia el campo operatorio y facilita la retracción de tejidos blandos como mejillas y lengua.&nbsp;</div>
+            <div class="card"><img src="sondae.jpeg" width="4" height="55" alt=""/><strong>Sonda Exploradora</strong>Se utiliza para detectar irregularidades en la superficie dental, fracturas o lesiones.&nbsp;</div>
+            <div class="card"><img src="sondap.jpeg" width="940" height="788" alt=""/><strong>Sonda Periodontal</strong>Mide la profundidad de las bolsas periodontales y evalúa el nivel de inserción y soporte óseo.&nbsp;</div>
         </div>
 		<footer>
     <div class="credits-container">
@@ -221,7 +215,7 @@
 
         <div class="qr-container">
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSeV3LJBA8NRk8zDEfGL_mRSxBwHm049yVEm9FG4LTK64nseHg/viewform" target="_blank" title="¡Danos tu opinión!">
-                <img src="proyecto/qr.png" alt="QR Cuestionario de Opinión" class="qr-imagen">
+                <img src="qr.png" alt="QR Cuestionario de Opinión" class="qr-imagen">
             </a>
             <span>¿Qué te pareció la página? ¡Escanea aquí!</span>
         </div>
