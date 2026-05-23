@@ -5,23 +5,32 @@
     <title>Instrumental - Exodoncia</title>
     <style> body { font-family: sans-serif; margin: 0; background: #f4f7f6; }
         header { background: #2c3e50; color: white; padding: 20px; text-align: center; }
-        nav { display: flex; justify-content: center; background: #ddd; }
+     nav { display: flex; box-sizing: border-box; justify-content: flex-start; background: #ddd; padding: 10px 20px; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
         nav a {
-    padding: 10px 15px; 
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    
-   
-    font-size: 14px;     
-    text-align: center;   
-    display: flex;     
-    align-items: center;  
-    justify-content: center;
-    min-width: 100px;    
-}
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 14px;
+            text-align: center;
+            display: inline-block;
+            align-items: center;
+            justify-content: center;
+            min-width: 100px;
+            flex-shrink: 0; /* 👈 Esto evita que el celular aplaste Diagnóstico y Sutura */
+        }
         nav a:hover { background: #ccc; }
         nav a.active { background: white; border-bottom: 3px solid #3498db; color: #3498db; }
+		 main { 
+            width: 95%; 
+            max-width: 800px; 
+            margin: 30px auto; /* ↕️ ¡ESTA ES LA CLAVE! 30px arriba y abajo despeja los instrumentos del menú y los distribuye mejor */
+            background: white; 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+            box-sizing: border-box;
+        }
         main { max-width: 800px; margin: 30px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .card { border: 1px solid #eee; padding: 15px; border-radius: 5px; background: #fafafa; }
