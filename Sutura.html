@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Instrumental - Sutura</title>
+	 <style>
+        body { font-family: sans-serif; margin: 0; background: #f4f7f6; }
+        header { background: #2c3e50; color: white; padding: 20px; text-align: center; }
+    nav { 
+            display: flex; 
+            box-sizing: border-box; 
+            justify-content: flex-start; 
+            background: #ddd; 
+            padding: 10px 20px; 
+            overflow-x: auto; 
+            white-space: nowrap; 
+            -webkit-overflow-scrolling: touch; 
+        }
+        nav a {
+            display: inline-block; /* 👈 Caja simple en línea para que el celular la pueda arrastrar */
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 14px;
+            text-align: center;
+            min-width: 110px;      /* Un ancho fijo mínimo para que las palabras quepan completas */
+            flex-shrink: 0;        /* 👈 Obliga al cel a mantener el ancho y activar el arrastre */
+        }
+        nav a:hover { background: #ccc; }
+        nav a.active { background: white; border-bottom: 3px solid #3498db; color: #3498db; }
+
+        /* 💻 ESTILO PARA COMPUTADORAS (Vuelve a centrar todo) */
+        @media (min-width: 900px) {
+            nav {
+                justify-content: center; 
+                overflow-x: visible;     
+                white-space: normal;
+            }
+            nav a {
+                display: flex;           /* En compu regresa a flex para centrarse perfecto */
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 1;
+                min-width: auto;
+            }
+        }
+		 main { 
+            width: 95%; 
+            max-width: 800px; 
+            margin: 30px auto; /* ↕️ ¡ESTA ES LA CLAVE! 30px arriba y abajo despeja los instrumentos del menú y los distribuye mejor */
+            background: white; 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+            box-sizing: border-box;
+        }
+        main { max-width: 800px; margin: 30px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .card { border: 1px solid #eee; padding: 15px; border-radius: 5px; background: #fafafa; }
+        strong { color: #2c3e50; display: block; margin-bottom: 5px; }
+		 .instrument-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Se ajusta solo al ancho de la pantalla */
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    overflow: hidden; /* Corta la imagen si sobresale de las esquinas redondeadas */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.card-image {
+    width: 100%;
+    height: 180px; /* Altura fija para que todas las fotos se vean iguales */
+    background-color: #f0f0f0; /* Color gris de fondo si no hay foto */
+    border-bottom: 1px solid #eee;
+    overflow: hidden;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta la foto sin deformarla */
+}
+
+.card-info {
+    padding: 15px;
+}
+
+.card-info strong {
+    color: #2c3e50;
+    font-size: 1.1em;
+    display: block;
+    margin-bottom: 5px;
+}
+	 .card img {
+    width: 100%;          /* Esto hace que la foto nunca sea más ancha que la tarjeta */
+    height: 200px;        /* Altura fija para que todas se vean parejitas */
+    object-fit: contain;    /* ¡Esta es la clave! Recorta la foto para que no se vea estirada o flaca */
+    display: block;       /* Quita espacios raros debajo de la imagen */
+    margin-bottom: 10px;  /* Separa la foto del título */
+    border-radius: 5px;   /* Le da un toque profesional con esquinas redondeadas */
+}
+		 footer {
+    background-color: #dcdcdc;
+    color: 2c3e50;
+    padding: 30px 50px;
+    margin-top: 50px; 
+    text-align: left;
+    border-top: 4px solid #2c3e50; 
+}
+
+.credits-container p {
+    margin: 5px 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.credits-container strong {
+    color: #2c3e50;
+}
+	 /* --- ESTILOS PARA EL FOOTER CON CRÉDITOS Y QR --- */
+
+/* Hace que los créditos y el QR se separen a los extremos */
+.credits-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Centra verticalmente ambos elementos */
+    flex-wrap: wrap; /* Por si se abre en pantallas muy chicas, no se amontone */
+    padding: 10px 20px;
+}
+
+.creditos-texto {
+    text-align: left;
+}
+
+.creditos-texto p {
+    margin: 4px 0; /* Espaciado limpio entre líneas de texto */
+}
+
+/* Contenedor del código QR alineado a la derecha */
+.qr-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Control del tamaño del código QR */
+.qr-imagen {
+    width: 90px;  /* Tamaño ideal para que no rompa el diseño gris */
+    height: 90px;
+    border: 3px solid #ffffff; /* Pequeño marco blanco para resaltar */
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: transform 0.2s ease;
+}
+
+/* Efecto visual al pasar el mouse por encima del QR */
+.qr-imagen:hover {
+    transform: scale(1.05); 
+}
+
+/* Texto pequeño debajo del QR */
+.qr-container span {
+    font-size: 11px;
+    font-weight: bold;
+    color: #555555;
+    margin-top: 6px;
+}
+    </style>
+</head>
+<body>
+    <header><h1>Instrumental Dental General</h1></header>
+    <nav>
+        <a href="index.html">Diagnóstico</a>
+  		<a href="Anestesia.html">Anestesia</a> 
+		<a href="Incisión.html">Incisión</a> 
+		<a href="Despegamiento y elevación.html">Despegamiento y Elevación</a>
+		<a href="Extracción.html">Extracción</a>
+		<a href="Rotatorio.html">Rotatorio</a>
+		<a href="Legrado y Limpieza.html">Legrado y Limpieza</a>
+		<a href="Hemostasia.html">Hemostasia</a>
+		<a href="Sutura.html" class="active">Sutura</a>
+    </nav>
+    <main>
+        <h2>Instrumental de Sutura</h2>
+        <div class="grid">
+            <div class="card"><img src="proyecto/portaa.jpeg" width="500" height="500" alt=""/><strong>Porta-agujas&nbsp;(Mayo-Hegar)</strong>Instrumento que sostiene la aguja curva durante la sutura.&nbsp;</div>
+            <div class="card"><img src="proyecto/suturayaguja.jpg" width="500" height="500" alt=""/><strong>Sutura y agujas</strong>Conjunto de hilo (seda, nylon, etc.) y aguja (recta o curva) que permite aproximar los tejidos para su cicatrización .</div>
+           
+      </div>
+				<footer>
+    <div class="credits-container">
+        <div class="creditos-texto">
+            <p><strong>Ingeniería Biomédica - 2026</strong></p>
+            <p><strong>Proyecto:</strong> Catálogo de Instrumental Quirúrgico para Implantología y Diagnóstico</p>
+            <p><strong>Desarrollado por:</strong> Samantha Yaretzi Cardoso Moron</p>
+            <p>Belinda Michua Juarez&nbsp;</p>
+            <p>Vanesa Gonzales Alvarado</p>
+            <p>Maria Fernanda Gonzáles Reyes</p>
+        </div>
+
+        <div class="qr-container">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeV3LJBA8NRk8zDEfGL_mRSxBwHm049yVEm9FG4LTK64nseHg/viewform" target="_blank" title="¡Danos tu opinión!">
+                <img src="proyecto/qr.png" alt="QR Cuestionario de Opinión" class="qr-imagen">
+            </a>
+            <span>¿Qué te pareció la página? ¡Escanea aquí!</span>
+        </div>
+    </div>
+</footer>
+    </main>
+</body>
+</html>
